@@ -1,6 +1,6 @@
 {
   "name": "clock24",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "A TypeScript library for easier native-like time input handling.",
   "keywords": [
     "typescript",
