@@ -3,12 +3,13 @@ import { Listener, State } from './state';
 export type TimeDouble = 'hh'|'mm';
 
 export class TimeElement {
+  private pValue: State<string> = new State('00:00');
   hh: DoubleDigit;
   mm: DoubleDigit;
   hhElement: HTMLInputElement;
   mmElement: HTMLInputElement;
   nativeElement: HTMLInputElement|null;
-  syncOut: Function = () => {};
+  syncNative: Function = () => {};
 
   constructor(
     hhElement: HTMLInputElement,
@@ -16,19 +17,34 @@ export class TimeElement {
     nativeElement: HTMLInputElement|null = null,
     value: string = '00:00'
   ) {
+
     this.hh = new DoubleDigit('hh');
     this.mm = new DoubleDigit('mm');
     this.hhElement = hhElement;
     this.mmElement = mmElement;
     this.nativeElement = nativeElement;
-    this.value = value;
+
+    this.pValue.set(value); // Sets pValue
+    this.value = value; // Sets hh and mm
+
+    // This is for the future
+    this.hh.subscribe((_v) => { this.setValue(); });
+    this.mm.subscribe((_v) => { this.setValue(); });
+  }
+
+  public subscribe(fn: Listener<string>) {
+    this.pValue.subscribe(fn);
+  }
+
+  private setValue() {
+    this.pValue.set(`${this.hh.value}:${this.mm.value}`);
   }
 
   get value(): string {
-    return `${this.hh.value}:${this.mm.value}`;
+    return this.pValue.get();
   }
-  set value(value: string) {
-    const split: string[] = value.split(':');
+  set value(v: string) {
+    const split: string[] = v.split(':');
     this.hh.resetValue(split[0]);
     this.mm.resetValue(split[1]);
   }

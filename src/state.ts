@@ -7,6 +7,6 @@ export class State<T> {
   constructor(initial: T) { this.value = initial; }
 
   get(): T { return this.value; }
-  set(v: T) { this.value = v; this.listeners.forEach(l => l(v)); }
+  set(v: T) { if (this.value != v) { this.value = v; this.listeners.forEach(l => l(v)); } }
   subscribe(fn: Listener<T>) { this.listeners.push(fn); }
 }

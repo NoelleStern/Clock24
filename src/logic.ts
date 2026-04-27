@@ -23,7 +23,7 @@ export class TimeElement extends TimeElementInternal {
     if (this.nativeElement) {
       this.nativeElement.value = this.value; // Setup value
       this.nativeElement.onchange = (e) => { onChange(this, e); } // Setup native Element
-      this.syncOut = () => { this.nativeElement!.value = this.value; }; // Setup syncOut function
+      this.syncNative = () => { this.nativeElement!.value = this.value; }; // Setup syncNative function
     }
   }
 }
@@ -36,12 +36,10 @@ export function onChange(timeElement: TimeElementInternal, _e: Event) {
   
   if (TimeElement.validate(value)) {
     timeElement.value = value;
-    // timeElement.syncOut();
   } else if (value == '') {
     // I think doing this generally would be an issue, but since
     // this piece of code is only relevant for mobile it should be fine
     timeElement.value = '00:00';
-    // timeElement.syncOut();
   }
 }
 
@@ -134,7 +132,7 @@ export function onBeforeInput(timeElement: TimeElementInternal, e: InputEvent & 
   }
 
   // Validate and update
-  if (timeElement.validate()) { timeElement.syncOut(); } 
+  if (timeElement.validate()) { timeElement.syncNative(); } 
 
   // Change focus / reselect
   if (!nextFlag) { e.currentTarget.select(); }
