@@ -1,0 +1,26 @@
+{
+  "name": "clock24",
+  "version": "1.0.0",
+  "description": "A TypeScript library for easier native-like time input handling.",
+  "keywords": [
+    "typescript",
+    "time",
+    "24H",
+    "utility"
+  ],
+  "homepage": "https://github.com/NoelleStern/Clock24#readme",
+  "bugs": {
+    "url": "https://github.com/NoelleStern/Clock24/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NoelleStern/Clock24.git"
+  },
+  "license": "ISC",
+  "author": "Noelle Stern",
+  "type": "commonjs",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
