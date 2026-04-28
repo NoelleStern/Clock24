@@ -54,13 +54,17 @@ const timeElement: TimeElement = new TimeElement(
     document.getElementById('native-input'), // Or null if you aren't concerned
     '04:20' // Set the value, '00:00' by default
 );
-
-timeElement.subscribe((v) => { console.log(v); }); // Value subscription example
 timeElement.init(); // Initialize to make it work
+```
+Then you can subscribe to the changes just like that:
 
+```TypeScript
+// Value subscription example
+timeElement.subscribe((v) => { console.log(`time: ${v}`); });
+
+// Let's check it
 console.log(timeElement.value); // Should print '04:20'
-
-timeElement.value = '03:00'; // Will trigger subscription and print '03:00'
+timeElement.value = '03:00'; // Will trigger subscription and print 'time: 03:00'
 ```
 
 Now when typing it'll act in exactly the same way a native input would. The only thing still left to do is to style it to your liking and you're free to do so! It's actually that simple!
